@@ -10,43 +10,72 @@ class CourseDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
         children: [
+          // Top Banner
           Container(
-            height: 250,
+            height: 260,
             decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [AppColors.primary, AppColors.secondary],
+              color: AppColors.primary,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(30),
+                bottomRight: Radius.circular(30),
               ),
             ),
             child: SafeArea(
               child: Center(
-                child: Text(course.title,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold)),
+                child: Text(
+                  course.title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ),
           ),
 
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text("⭐ ${course.rating} • ${course.students} students"),
+
                   const SizedBox(height: 10),
-                  Text("\$${course.price} • ${course.duration} hours"),
+
+                  Text(
+                    "\$${course.price}",
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+
                   const SizedBox(height: 20),
-                  Text(course.description),
+
+                  const Text("About Course",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+
+                  const SizedBox(height: 10),
+
+                  Text(course.description,
+                      style: const TextStyle(color: Colors.grey)),
 
                   const Spacer(),
 
                   SizedBox(
                     width: double.infinity,
+                    height: 55,
                     child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primary,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
                       onPressed: () {},
                       child: const Text("Enroll Now"),
                     ),

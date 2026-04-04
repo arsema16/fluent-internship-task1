@@ -8,46 +8,93 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Fluent"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text("Hello, Arsema 👋",
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 20),
+      backgroundColor: const Color(0xFFF5F7FB),
+      body: SafeArea(
+        child: SingleChildScrollView( // ✅ prevents overflow
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 10),
 
-            const Text("Recommended",
-                style: TextStyle(fontSize: 18)),
+                const Text(
+                  "Fluent",
+                  style: TextStyle(
+                      fontSize: 28, fontWeight: FontWeight.bold),
+                ),
 
-            const SizedBox(height: 10),
+                const SizedBox(height: 5),
 
-            SizedBox(
-              height: 160,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: courses.length,
-                itemBuilder: (context, index) {
-                  return CourseCard(course: courses[index]);
-                },
-              ),
+                const Text(
+                  "Upgrade your skills 🚀",
+                  style: TextStyle(color: Colors.grey),
+                ),
+
+                const SizedBox(height: 25),
+
+                // Search
+                Container(
+                  height: 50,
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: const Row(
+                    children: [
+                      Icon(Icons.search, color: Colors.grey),
+                      SizedBox(width: 10),
+                      Text("Search courses...",
+                          style: TextStyle(color: Colors.grey)),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 25),
+
+                const Text(
+                  "Popular Courses",
+                  style: TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+
+                const SizedBox(height: 15),
+
+                // ✅ FIXED HEIGHT (NO OVERFLOW)
+                SizedBox(
+                  height: 230,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: courses.length,
+                    itemBuilder: (context, index) {
+                      return CourseCard(course: courses[index]);
+                    },
+                  ),
+                ),
+
+                const SizedBox(height: 30),
+
+                SizedBox(
+                  width: double.infinity,
+                  height: 55,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/courses');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                    ),
+                    child: const Text("Browse All Courses"),
+                  ),
+                ),
+
+                const SizedBox(height: 20), // ✅ extra spacing
+              ],
             ),
-
-            const Spacer(),
-
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/courses');
-                },
-                child: const Text("Browse Courses"),
-              ),
-            )
-          ],
+          ),
         ),
       ),
     );

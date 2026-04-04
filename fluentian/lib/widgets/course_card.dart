@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../models/course.dart';
-import '../core/theme/app_colors.dart';
 
 class CourseCard extends StatelessWidget {
   final Course course;
@@ -11,35 +10,67 @@ class CourseCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(
-          context,
-          '/detail',
-          arguments: course,
-        );
+        Navigator.pushNamed(context, '/detail', arguments: course);
       },
-      child: Container(
-        width: 260,
-        margin: const EdgeInsets.only(right: 16),
-        padding: const EdgeInsets.all(16),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        width: 200,
+        margin: const EdgeInsets.only(right: 15),
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [AppColors.primary, AppColors.secondary],
-          ),
           borderRadius: BorderRadius.circular(20),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.08),
+              blurRadius: 10,
+            )
+          ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(course.title,
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold)),
-            const Spacer(),
-            Text("⭐ ${course.rating}",
-                style: const TextStyle(color: Colors.white)),
-            Text("${course.duration}h",
-                style: const TextStyle(color: Colors.white)),
+            // IMAGE
+            ClipRRect(
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+              child: Image.network(
+                course.image,
+                height: 110,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(course.title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold)),
+
+                  const SizedBox(height: 5),
+
+                  Text(course.description,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontSize: 12, color: Colors.grey)),
+
+                  const SizedBox(height: 10),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("⭐ ${course.rating}"),
+                      Text("\$${course.price}",
+                          style: const TextStyle(fontWeight: FontWeight.bold)),
+                    ],
+                  )
+                ],
+              ),
+            )
           ],
         ),
       ),
