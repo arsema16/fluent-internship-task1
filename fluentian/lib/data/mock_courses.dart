@@ -1,6 +1,5 @@
 import '../models/course.dart';
 
-// Using Unsplash Source API — topic-matched photos, CORS-friendly, no auth needed
 final List<Course> mockCourses = [
   Course(
     id: '1',

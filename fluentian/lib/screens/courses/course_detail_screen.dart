@@ -90,7 +90,6 @@ class CourseDetailScreen extends StatelessWidget {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              // Colored background so transparent images still look good
               Container(color: AppColors.surfaceLight),
               Image.network(
                 course.image,
@@ -115,7 +114,6 @@ class CourseDetailScreen extends StatelessWidget {
                   );
                 },
               ),
-              // Gradient overlay so text below is readable
               Container(
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(

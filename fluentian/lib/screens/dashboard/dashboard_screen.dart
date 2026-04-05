@@ -46,7 +46,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 slivers: [
                   SliverToBoxAdapter(child: _buildHeader()),
                   SliverToBoxAdapter(child: _buildStatsRow()),
-                  // Recently Viewed section (shows only after user visits a course)
                   if (RecentlyViewed.courses.isNotEmpty) ...[
                     const SliverToBoxAdapter(child: SizedBox(height: 28)),
                     SliverToBoxAdapter(

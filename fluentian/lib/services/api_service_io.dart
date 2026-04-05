@@ -33,7 +33,6 @@ Future<List<Course>> fetchCoursesFromNetwork() async {
       });
     }
   } catch (_) {
-    // fall through to mock
   }
   return mockCourses;
 }
