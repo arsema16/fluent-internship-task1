@@ -1,89 +1,56 @@
 import 'package:flutter/material.dart';
 import '../../models/course.dart';
-import '../../core/theme/app_colors.dart';
 
 class CourseDetailScreen extends StatelessWidget {
   final Course course;
 
-  const CourseDetailScreen({super.key, required this.course});
+  CourseDetailScreen({required this.course});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       body: Column(
         children: [
-          // Top Banner
-          Container(
-            height: 260,
-            decoration: const BoxDecoration(
-              color: AppColors.primary,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(30),
-                bottomRight: Radius.circular(30),
-              ),
-            ),
-            child: SafeArea(
-              child: Center(
-                child: Text(
-                  course.title,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
+          Hero(
+            tag: course.id,
+            child: Image.network(
+              course.image,
+              height: 300,
+              width: double.infinity,
+              fit: BoxFit.cover,
             ),
           ),
 
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("⭐ ${course.rating} • ${course.students} students"),
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(course.title,
+                    style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white)),
 
-                  const SizedBox(height: 10),
+                SizedBox(height: 10),
 
-                  Text(
-                    "\$${course.price}",
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
+                Text(course.description,
+                    style: TextStyle(color: Colors.white70)),
 
-                  const SizedBox(height: 20),
+                SizedBox(height: 20),
 
-                  const Text("About Course",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-
-                  const SizedBox(height: 10),
-
-                  Text(course.description,
-                      style: const TextStyle(color: Colors.grey)),
-
-                  const Spacer(),
-
-                  SizedBox(
-                    width: double.infinity,
-                    height: 55,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                      ),
-                      onPressed: () {},
-                      child: const Text("Enroll Now"),
-                    ),
-                  )
-                ],
-              ),
+                Text("💰 \$${course.price}",
+                    style: TextStyle(color: Colors.white)),
+                Text("⏱ ${course.duration} hrs",
+                    style: TextStyle(color: Colors.white)),
+                Text("⭐ ${course.rating}",
+                    style: TextStyle(color: Colors.white)),
+                Text("👥 ${course.enrollments}",
+                    style: TextStyle(color: Colors.white)),
+              ],
             ),
-          )
+          ),
         ],
       ),
     );
